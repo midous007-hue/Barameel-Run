@@ -1,0 +1,33 @@
+:root{--teal:#062f38;--cream:#f7e6bd;--orange:#f39a20;--red:#d94824;--yellow:#f5b32b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#031f26;font-family:Arial,Helvetica,sans-serif}
+body{display:grid;place-items:center}
+.app{width:100%;height:100%;height:100svh;display:grid;place-items:center;background:#031f26}
+.stage{position:relative;height:100%;width:min(100vw,560px);max-width:560px;overflow:hidden;background:var(--teal);box-shadow:0 0 60px #000}
+.screen-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;user-select:none;-webkit-user-drag:none;transition:opacity .18s ease,transform .35s cubic-bezier(.2,.8,.2,1);z-index:1}
+.screen-art.transition{opacity:.35;transform:scale(1.025)}
+.tap-layer{position:absolute;inset:0;z-index:10}
+.character-overlay{position:absolute;z-index:8;left:50%;top:26%;transform:translateX(-50%);width:31%;max-width:165px;aspect-ratio:.5;border:3px solid var(--yellow);border-radius:14px;background:var(--teal);box-shadow:0 8px 25px #0009;overflow:hidden;display:grid;place-items:center}
+.character-overlay img{width:100%;height:100%;object-fit:cover}
+.hidden{display:none!important}
+.toast{position:absolute;left:50%;bottom:5%;z-index:50;transform:translate(-50%,15px);padding:12px 18px;border:2px solid var(--yellow);border-radius:999px;background:#062f38f2;color:var(--cream);font-weight:900;font-size:12px;letter-spacing:.08em;text-align:center;opacity:0;pointer-events:none;transition:.22s ease;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+.modal{position:absolute;inset:0;z-index:100;background:#031f26d9;display:grid;place-items:center;padding:18px}
+.character-panel{width:min(94vw,500px);background:#062f38;border:3px solid var(--yellow);border-radius:20px;padding:18px;box-shadow:0 20px 80px #000b}
+.character-title{color:var(--cream);font-size:clamp(24px,6vw,38px);font-weight:1000;font-style:italic;text-align:center;margin-bottom:14px;text-transform:uppercase}
+.character-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.character-card{position:relative;border:2px solid #f7e6bd77;border-radius:12px;overflow:hidden;background:#0a3942;cursor:pointer;aspect-ratio:.68;transition:.15s}
+.character-card.selected{border-color:var(--yellow);box-shadow:0 0 0 3px #f5b32b44,0 0 20px #f5b32b55;transform:translateY(-2px)}
+.character-card img{width:100%;height:100%;object-fit:cover}
+.character-card span{position:absolute;bottom:0;left:0;right:0;padding:7px 3px;background:#062f38e8;color:var(--cream);font-size:10px;font-weight:1000;text-align:center}
+.gold-btn,.demo-scan{border:3px solid #ffe2a1;border-radius:999px;background:linear-gradient(#ffb82e,#ee8d18);color:#062f38;font-weight:1000;letter-spacing:.04em;box-shadow:0 5px 0 #8b391e;cursor:pointer}
+.gold-btn{width:100%;padding:14px;margin-top:14px;font-size:18px}
+.camera-layer{position:absolute;inset:0;z-index:80;background:#031f26;display:grid;place-items:center}
+#camera{width:100%;height:100%;object-fit:cover;opacity:.9}
+.scan-frame{position:absolute;width:58%;aspect-ratio:1;border:4px solid var(--cream);box-shadow:0 0 0 999px #031f2670;border-radius:18px}
+.scan-frame:before,.scan-frame:after,.scan-frame span:before,.scan-frame span:after{content:"";position:absolute;width:28px;height:28px;border-color:var(--yellow);border-style:solid}
+.scan-frame:before{left:-4px;top:-4px;border-width:5px 0 0 5px}.scan-frame:after{right:-4px;top:-4px;border-width:5px 5px 0 0}.scan-frame span:before{left:-4px;bottom:-4px;border-width:0 0 5px 5px}.scan-frame span:after{right:-4px;bottom:-4px;border-width:0 5px 5px 0}
+.scan-label{position:absolute;top:10%;color:var(--cream);font-weight:1000;font-size:22px;font-style:italic;text-shadow:0 3px #000}
+.demo-scan{position:absolute;bottom:9%;padding:13px 24px;font-size:14px}
+.camera-close{position:absolute;top:5%;right:6%;z-index:5;width:46px;height:46px;border-radius:50%;border:2px solid var(--cream);background:#062f38dd;color:var(--cream);font-size:32px;line-height:1;cursor:pointer}
+@media(min-width:700px){.stage{height:96vh;border-radius:24px}.character-panel{width:500px}}

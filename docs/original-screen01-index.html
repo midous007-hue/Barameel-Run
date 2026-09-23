@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#062f38">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>BARAMEEL RUN — Screen 01</title>
+<style>
+:root{--teal:#062f38;--cream:#f7e6bd;--orange:#f39a20;--red:#d94824;--yellow:#f5b32b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;width:100%;height:100%;background:var(--teal);overflow:hidden}
+body{font-family:Arial,Helvetica,sans-serif}
+#app{position:fixed;inset:0;width:100%;height:100%;height:100svh;min-height:100dvh;overflow:hidden;background:var(--teal);isolation:isolate}
+.art{position:absolute;inset:0;width:100%;height:100%;display:block;object-fit:fill;user-select:none;-webkit-user-drag:none;z-index:0}
+/* The reference artwork is a full-screen app artwork only. No phone frame / mockup is used. */
+.logo-wrap{position:absolute;z-index:5;left:50%;top:5.0%;width:min(56vw,390px);transform:translateX(-50%);pointer-events:none;filter:drop-shadow(0 5px 0 rgba(0,0,0,.28)) drop-shadow(0 10px 18px rgba(0,0,0,.22))}
+.logo-wrap img{display:block;width:100%;height:auto}
+.safe-top{position:absolute;left:0;right:0;top:0;height:max(env(safe-area-inset-top),0px);z-index:10;pointer-events:none;background:linear-gradient(to bottom,rgba(0,0,0,.12),transparent)}
+.grain{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.055;mix-blend-mode:soft-light;background-image:radial-gradient(rgba(255,255,255,.8) .6px,transparent .7px),radial-gradient(rgba(0,0,0,.75) .6px,transparent .7px);background-size:5px 5px,7px 7px;animation:grain .9s steps(2) infinite}
+.hit{position:absolute;border:0;background:transparent;padding:0;margin:0;z-index:8;cursor:pointer;touch-action:manipulation;outline:none}
+#start{left:9%;right:9%;top:80.2%;height:8.3%;border-radius:999px}
+#how{left:31%;width:38%;top:90.0%;height:4.2%}
+#menu{right:2%;top:1.1%;width:15%;height:7.5%;border-radius:50%}
+#peace{left:2%;top:1.1%;width:14%;height:7.5%;border-radius:50%}
+.hit:active{transform:scale(.985)}
+#start::after{content:"";position:absolute;inset:-5px;border:3px solid rgba(246,181,45,.0);border-radius:999px;transform:scale(.98)}
+#start:focus-visible::after,#start.running::after{animation:pulse .75s ease-out}
+#start.running{animation:press .28s ease-out}
+.ripple{position:absolute;width:22px;height:22px;margin:-11px;border-radius:50%;border:3px solid rgba(255,222,139,.95);box-shadow:0 0 24px rgba(246,181,45,.55);transform:scale(.35);opacity:0;z-index:9;pointer-events:none;animation:ripple .7s ease-out forwards}
+.flash{position:absolute;inset:0;z-index:7;pointer-events:none;background:radial-gradient(circle at 50% 84%,rgba(255,230,155,.75),transparent 20%);opacity:0}
+.flash.go{animation:flash .7s ease-out}
+.drawer{position:absolute;left:0;right:0;bottom:0;z-index:30;padding:18px 18px max(22px,env(safe-area-inset-bottom));background:rgba(4,29,35,.97);border-top:2px solid rgba(245,179,43,.75);box-shadow:0 -24px 70px rgba(0,0,0,.5);transform:translateY(110%);transition:transform .38s cubic-bezier(.2,.85,.2,1);color:var(--cream)}
+.drawer.open{transform:translateY(0)}
+.drawer-inner{max-width:720px;margin:auto}
+.drawer h2{margin:0 0 8px;color:var(--yellow);font:900 25px/1 Impact,Arial Narrow,Arial,sans-serif;letter-spacing:.02em}
+.drawer p{margin:0 0 14px;font:600 15px/1.5 Arial,sans-serif}
+.drawer button{border:2px solid var(--cream);border-radius:999px;padding:10px 20px;background:var(--orange);color:#062f38;font:900 13px/1 Arial,sans-serif}
+.toast{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom));z-index:40;transform:translate(-50%,18px);padding:11px 17px;min-width:220px;max-width:calc(100% - 30px);border:1px solid rgba(247,230,189,.25);border-radius:999px;background:rgba(4,29,35,.94);color:var(--cream);font:800 12px/1.1 Arial,sans-serif;letter-spacing:.08em;text-align:center;opacity:0;pointer-events:none;transition:.2s ease;box-shadow:0 12px 36px rgba(0,0,0,.45)}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@keyframes pulse{0%{opacity:1;box-shadow:0 0 0 0 rgba(246,181,45,.55);transform:scale(.98)}100%{opacity:0;box-shadow:0 0 0 20px rgba(246,181,45,0);transform:scale(1.03)}}
+@keyframes press{0%{filter:brightness(1)}45%{filter:brightness(1.22)}100%{filter:brightness(1)}}
+@keyframes ripple{0%{opacity:.9;transform:scale(.35)}100%{opacity:0;transform:scale(7)}}
+@keyframes flash{0%{opacity:0}18%{opacity:.55}100%{opacity:0}}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-1px,1px)}50%{transform:translate(1px,-1px)}75%{transform:translate(1px,1px)}100%{transform:translate(-1px,-1px)}}
+@media (max-width:380px){.logo-wrap{top:5.4%;width:57vw}.drawer h2{font-size:22px}.drawer p{font-size:14px}}
+@media (min-width:700px){.logo-wrap{width:360px}}
+@media (prefers-reduced-motion:reduce){.grain{animation:none}.ripple,.flash{animation:none!important}}
+</style>
+</head>
+<body>
+<main id="app" aria-label="BARAMEEL RUN — Screen 01">
+  <img class="art" src="assets/screen01-art.webp" alt="">
+  <div class="logo-wrap" aria-hidden="true"><img src="assets/barameel-logo-original.webp" alt=""></div>
+  <div class="safe-top" aria-hidden="true"></div>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="flash" id="flash" aria-hidden="true"></div>
+
+  <button class="hit" id="peace" aria-label="BARAMEEL identity"></button>
+  <button class="hit" id="menu" aria-label="Menu"></button>
+  <button class="hit" id="start" aria-label="Start your run"></button>
+  <button class="hit" id="how" aria-label="How it works"></button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <section class="drawer" id="drawer" aria-hidden="true">
+    <div class="drawer-inner">
+      <h2>HOW BARAMEEL RUN WORKS</h2>
+      <p>Pick your crew, scan a starting QR, walk toward BARAMEEL, collect Marks as you move, then show your verified reward at the counter.</p>
+      <button id="closeDrawer">GOT IT</button>
+    </div>
+  </section>
+</main>
+<script>
+(()=>{
+ const app=document.getElementById('app');
+ const toast=document.getElementById('toast');
+ const drawer=document.getElementById('drawer');
+ const flash=document.getElementById('flash');
+ const showToast=(msg)=>{toast.textContent=msg;toast.classList.add('show');clearTimeout(showToast.t);showToast.t=setTimeout(()=>toast.classList.remove('show'),1700)};
+ const ripple=(e)=>{const p=e.changedTouches?.[0]||e;const r=document.createElement('span');const b=app.getBoundingClientRect();r.className='ripple';r.style.left=(p.clientX-b.left)+'px';r.style.top=(p.clientY-b.top)+'px';app.appendChild(r);r.addEventListener('animationend',()=>r.remove(),{once:true})};
+ document.getElementById('start').addEventListener('click',e=>{ripple(e);const b=e.currentTarget;b.classList.remove('running');void b.offsetWidth;b.classList.add('running');flash.classList.remove('go');void flash.offsetWidth;flash.classList.add('go');showToast('YOUR RUN IS STARTING…');window.dispatchEvent(new CustomEvent('barameel:start-run',{detail:{source:'screen-01',timestamp:Date.now()}}));});
+ document.getElementById('how').addEventListener('click',e=>{ripple(e);drawer.classList.add('open');drawer.setAttribute('aria-hidden','false')});
+ document.getElementById('closeDrawer').addEventListener('click',()=>{drawer.classList.remove('open');drawer.setAttribute('aria-hidden','true')});
+ document.getElementById('peace').addEventListener('click',e=>{ripple(e);showToast('GOOD FOOD. BETTER PEOPLE.')});
+ document.getElementById('menu').addEventListener('click',e=>{ripple(e);showToast('BARAMEEL RUN')});
+})();
+</script>
+</body>
+</html>

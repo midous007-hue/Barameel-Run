@@ -1,0 +1,10 @@
+{
+  "name":"BARAMEEL RUN",
+  "short_name":"BARAMEEL RUN",
+  "start_url":"./",
+  "display":"standalone",
+  "background_color":"#062f38",
+  "theme_color":"#062f38",
+  "description":"BARAMEEL RUN — retro checkpoint reward game prototype",
+  "icons":[]
+}
